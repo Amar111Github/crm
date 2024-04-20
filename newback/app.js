@@ -2,6 +2,7 @@ var express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
+const {connectToMongoDB}=require("./dbConnection/dbconnect");
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const app = express();
@@ -13,7 +14,10 @@ const io = new Server(server, {
     credentials: true,
   },
 });
-require("dotenv").config();
+//////////////////////////////////////
+
+
+// require("dotenv").config();
 
 // acss the shows bdf file backend
 app.use("/files", express.static("files"));
