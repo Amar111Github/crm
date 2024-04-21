@@ -2,7 +2,7 @@ var express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
-const {connectToMongoDB}=require("./dbConnection/dbconnect");
+connection=require("./dbConnection/dbconnect");
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const app = express();
@@ -16,7 +16,10 @@ const io = new Server(server, {
 });
 //////////////////////////////////////
 
-
+// connection ("mongodb+srv://afrozzeelani:Zeelani123@cluster0.rvkkcii.mongodb.net/kasperinfotech")
+// .then(()=>
+// console.log("Mongodb Connected")
+// );
 // require("dotenv").config();
 
 // acss the shows bdf file backend
