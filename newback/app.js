@@ -1,9 +1,10 @@
-var express = require("express");
+const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose')
+
 const cors = require("cors");
 const http = require("http");
-connection=require("./dbConnection/dbconnect");
-const mongoose = require("mongoose");
+const connection = require("./dbConnection/dbconnect"); // Importing the connection function
 const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
@@ -14,15 +15,28 @@ const io = new Server(server, {
     credentials: true,
   },
 });
+
 //////////////////////////////////////
+mongoose.connect("mongodb+srv://afrozzeelani:Zeelani123@cluster0.rvkkcii.mongodb.net/kasperinfotech")
+  .then(() => {
+    console.log("MongoDB Connected");
+    // Place any code dependent on the database connection here
+  })
+  .catch(err => {
+    console.error("Error connecting to MongoDB:", err);
+  });
+// connection("mongodb+srv://afrozzeelani:Zeelani123@cluster0.rvkkcii.mongodb.net/kasperinfotech")
+//   .then(() => {
+//     console.log("MongoDB Connected");
+//     // Place any code dependent on the database connection here
+//   })
+//   .catch((error) => {
+//     console.error("Failed to connect to MongoDB:", error);
+//     process.exit(1); // Exit with error
+//   });
 
-// connection ("mongodb+srv://afrozzeelani:Zeelani123@cluster0.rvkkcii.mongodb.net/kasperinfotech")
-// .then(()=>
-// console.log("Mongodb Connected")
-// );
-// require("dotenv").config();
 
-// acss the shows bdf file backend
+// aces the shows bdf file backend
 app.use("/files", express.static("files"));
 
 // custom  Routes import file
@@ -33,13 +47,14 @@ const cityRoute = require("./routes/cityRoute");
 const companyRoute = require("./routes/companyRoute");
 const departmentRoute = require("./routes/departmentRoute");
 const roleRoute = require("./routes/roleRoute");
+
+
 const positionRoute = require("./routes/positionRoute");
 const employeeRoute = require("./routes//familyRoute");
 const familyRoute = require("./routes/employeeRoute");
 const workExperienceRoute = require("./routes//workExperienceRoute");
 const portalRoute = require("./routes/portalRoute");
 const projectRoute = require("./routes/projectRoute");
-
 const salaryRoute = require("./routes/salaryRoute");
 const leaveRoute = require("./routes/leaveRoute");
 const educationRoute = require("./routes/educationRoute");
@@ -111,6 +126,10 @@ const storage = multer.diskStorage({
   }
 });
 
+// connection("mongodb+srv://afrozzeelani:Zeelani123@cluster0.rvkkcii.mongodb.net/kasperinfotech")
+// .then(()=>
+// console.log("connect Mongodb")
+// );
 // require("./pdfDetails");
 // const { Task } = require("./models/taskModel");
 // const { Employee } = require("./models/employeeModel");
